@@ -1,0 +1,54 @@
+services:
+  nginx:
+    build: requirements/nginx
+    volumes:
+      - wordpress:/var/www/html
+    ports:
+      - "443:443"
+    networks:
+      - inception
+    depends_on:
+      - wordpress
+    restart: unless-stopped
+
+  wordpress:
+    build: requirements/wordpress
+    env_file:
+      - .env
+    volumes:
+      - wordpress:/var/www/html
+    expose:
+      - "9000"
+    networks:
+      - inception
+    depends_on:
+      - mariadb
+    restart: unless-stopped
+
+  mariadb:
+    build: requirements/mariadb
+    env_file:
+      - .env
+    volumes:
+      - mariadb:/var/lib/mysql
+    expose:
+      - "3306"
+    networks:
+      - inception
+    restart: unless-stopped
+
+volumes:
+  wordpress:
+    driver_opts:
+      type: none
+      device: /home/chayanne/data/wordpress
+      o: bind
+  mariadb:
+    driver_opts:
+      type: none
+      device: /home/chayanne/data/mariadb
+      o: bind
+
+networks:
+  inception:
+    driver: bridge
