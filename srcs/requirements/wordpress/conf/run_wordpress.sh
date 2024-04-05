@@ -1,7 +1,5 @@
 #!/bin/sh
 
-set -x
-
 wp_dir='/var/www/html'
 
 sleep 4
