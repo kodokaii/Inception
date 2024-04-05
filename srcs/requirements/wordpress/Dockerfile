@@ -1,7 +1,7 @@
 FROM alpine:3.18.6
 
 RUN apk update && apk upgrade
-RUN apk add php-fpm php-mysqli php-phar
+RUN apk add php-fpm php-mysqli php-phar php81-iconv
 RUN apk add wget
 
 RUN mkdir -p /var/www/html

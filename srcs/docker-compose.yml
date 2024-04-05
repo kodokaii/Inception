@@ -1,6 +1,8 @@
 services:
   nginx:
+    container_name: "nginx"
     build: requirements/nginx
+    image: "nginx"
     volumes:
       - wordpress:/var/www/html
     ports:
@@ -12,7 +14,9 @@ services:
     restart: unless-stopped
 
   wordpress:
+    container_name: "wordpress"
     build: requirements/wordpress
+    image: "wordpress"
     env_file:
       - .env
     volumes:
@@ -26,7 +30,9 @@ services:
     restart: unless-stopped
 
   mariadb:
+    container_name: "mariadb"
     build: requirements/mariadb
+    image: "mariadb"
     env_file:
       - .env
     volumes:
@@ -41,14 +47,14 @@ volumes:
   wordpress:
     driver_opts:
       type: none
-      device: /home/chayanne/data/wordpress
+      device: /home/nlaerema/data/wordpress
       o: bind
   mariadb:
     driver_opts:
       type: none
-      device: /home/chayanne/data/mariadb
+      device: /home/nlaerema/data/mariadb
       o: bind
 
 networks:
   inception:
-    driver: bridge
+   driver: bridge

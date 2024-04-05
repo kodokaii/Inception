@@ -1,13 +1,13 @@
 #!/bin/sh
 
+set -x
+
 wp_dir='/var/www/html'
 
 sleep 4
 
 if [ ! -e "${wp_dir}/wp-config.php" ]
 then
-
-	wp core download	--allow-root
 
 	wp config create	--allow-root \
 						--dbname=$DB_NAME \
